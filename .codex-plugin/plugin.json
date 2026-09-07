@@ -1,0 +1,18 @@
+{
+  "name": "claude-orchestrator",
+  "version": "0.1.0",
+  "description": "Delegate implementation and research to Claude Code with Codex-owned design and acceptance verification.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Claude Orchestrator",
+    "shortDescription": "Codexが判断・検証、Claude Codeが調査・実装",
+    "longDescription": "品質を優先し、短い引き継ぎと独立した受入検証でClaude Codeへの委譲を管理します。",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "claude-orchestratorを使い、設計と受入検証はCodex、調査と実装はClaude Codeに委譲してください。品質を優先してCodexの消費を抑えてください。"
+  }
+}
