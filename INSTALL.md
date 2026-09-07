@@ -29,7 +29,7 @@ plugin_target="$plugin_parent/claude-orchestrator"
 ```sh
 python3 "$plugin_tools/create_basic_plugin.py" claude-orchestrator \
   --path "$plugin_parent" --with-skills --with-marketplace
-cp -R "$plugin_source/skills/claude-orchestrator" "$plugin_target/skills/"
+cp -R "$plugin_source/skills/." "$plugin_target/skills/"
 cp "$plugin_source/.codex-plugin/plugin.json" "$plugin_target/.codex-plugin/plugin.json"
 python3 "$plugin_tools/validate_plugin.py" "$plugin_target"
 python3 "$plugin_tools/read_marketplace_name.py"
@@ -55,7 +55,7 @@ codex plugin add claude-orchestrator@personal
 
 ```sh
 python3 "$plugin_tools/read_marketplace_name.py"
-cp -R "$plugin_source/skills/claude-orchestrator/." "$plugin_target/skills/claude-orchestrator/"
+cp -R "$plugin_source/skills/." "$plugin_target/skills/"
 cp "$plugin_source/.codex-plugin/plugin.json" "$plugin_target/.codex-plugin/plugin.json"
 python3 "$plugin_tools/update_plugin_cachebuster.py" "$plugin_target"
 python3 "$plugin_tools/validate_plugin.py" "$plugin_target"
@@ -68,3 +68,16 @@ codex plugin add claude-orchestrator@personal
 ```
 
 反映確認は新しいCodexタスクで行います。
+
+### 開発リポジトリを直接登録済みの場合
+
+マーケットプレイスの `source.path` が開発リポジトリ自体を参照している場合は、上記のコピー手順は不要です。参照先が意図した原本であることを確認し、そのルートで次を実行します。
+
+```sh
+plugin_tools="${CODEX_HOME:-$HOME/.codex}/skills/.system/plugin-creator/scripts"
+python3 "$plugin_tools/read_marketplace_name.py"
+python3 "$plugin_tools/update_plugin_cachebuster.py" "$PWD"
+python3 "$plugin_tools/validate_plugin.py" "$PWD"
+```
+
+各コマンドの成功を確認し、出力されたマーケットプレイス名で `codex plugin add claude-orchestrator@personal` を実行します。キャッシュ更新用の識別子は原本の `plugin.json` に書き込まれるため、Git差分にも現れます。反映確認は新しいCodexタスクで行います。
