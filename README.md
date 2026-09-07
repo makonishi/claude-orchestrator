@@ -79,7 +79,9 @@ claude-orchestrator/
 ├── .codex-plugin/
 │   └── plugin.json
 ├── skills/
-│   └── claude-orchestrator/
+│   ├── claude-orchestrator/
+│   │   └── SKILL.md
+│   └── improve-claude-orchestrator/
 │       └── SKILL.md
 ├── .gitignore
 ├── INSTALL.md
@@ -88,6 +90,7 @@ claude-orchestrator/
 
 - [plugin.json](.codex-plugin/plugin.json): プラグインの名前、表示情報、スキルの場所
 - [SKILL.md](skills/claude-orchestrator/SKILL.md): Codexが読み込む委譲・検証ルール
+- [改善用スキル](skills/improve-claude-orchestrator/SKILL.md): このプラグインの改善点をIssueに登録し、指定Issueの修正・PR作成を進めるルール
 - [INSTALL.md](INSTALL.md): 登録、インストール、更新手順
 
 現状はスキルの指示に従ってCodexがシェル経由でClaude Codeを呼び出す構成です。独自の実行スクリプトやMCPサーバーは含んでいません。基本となる呼び出しは `claude -p --output-format json` で、利用可能なオプションや権限は実行時に確認します。
@@ -107,6 +110,24 @@ claude-orchestrator/
 > claude-orchestratorを使って、この機能の実装方法を調査して。Claude Codeが資料を集め、Codexが重要な一次資料を確認して採用案を判断して。
 
 ## Gitでの改善と反映
+
+### Issue・PRを使った改善
+
+`improve-claude-orchestrator` は、このプラグイン自体の改善を扱います。利用先プロジェクトのIssue管理には使いません。
+
+利用中に問題を見つけたタスクで、次のように依頼します。
+
+> improve-claude-orchestratorを使って、今回の引き継ぎと再調査の重複を改善Issueとして登録して。期待した動き、実際の例、受入条件を整理して。実装はまだ進めないで。
+
+登録先は `makonishi/claude-orchestrator` です。既存Issueを確認して重複を避け、会話全文や利用先プロジェクトの機密情報は転載しません。GitHubへのアクセスには、認証済みのGitHub連携または `gh` が必要です。
+
+対応するときは、開発リポジトリを開いて依頼します。
+
+> improve-claude-orchestratorを使って、Issue #123を修正し、検証してPRを作成して。
+
+専用ブランチで修正し、PRに検証結果とIssueへの関連付けを記載します。マージと利用環境への反映は別途依頼します。反映後は新しいCodexタスクで問題が改善したか確認してください。
+
+### ローカルでの反映
 
 取得したこのリポジトリを編集元とします。
 
